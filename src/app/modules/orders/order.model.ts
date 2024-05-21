@@ -10,7 +10,7 @@ const orderSchema = new Schema<TOrder>({
     // match: [/.+\@.+\..+/, 'Please enter a valid email address'],
   },
   productId: {
-    type: mongoose.Schema.ObjectId as string,
+    type: mongoose.Schema.ObjectId ,
     ref: 'Product',
     required: true
   },

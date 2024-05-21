@@ -30,22 +30,58 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 //   get all product
+// const getAllProduct = async (req: Request, res: Response) => {
+//   const { searchTerm } = req.query;
+//   console.log(searchTerm);
+
+//   let query:any;
+//   if (searchTerm) {
+//     query = searchTerm;
+//   }
+
+//   try {
+//     const result = await ProductService.getAllProductFromDb(query);
+//     res.status(200).json({
+//       success: true,
+//       message: 'Products fetched successfully!',
+//       data: result,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       message: 'No data found',
+//       error: error,
+//     });
+//   }
+// };
+
 const getAllProduct = async (req: Request, res: Response) => {
   const { searchTerm } = req.query;
   console.log(searchTerm);
 
-  let query:any;
-  if (searchTerm) {
-    query = searchTerm;
-  }
-
   try {
-    const result = await ProductService.getAllProductFromDb(query);
-    res.status(200).json({
-      success: true,
-      message: 'Products fetched successfully!',
-      data: result,
-    });
+    let query: any;
+    let result;
+
+    if (searchTerm) {
+      query = searchTerm;
+    }
+
+    if (query) {
+      result = await ProductService.getAllProductFromDb(query);
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term ${searchTerm} fetched successfully!`,
+        data: result,
+      });
+    } else {
+      result = await ProductService.getAllProductFromDb({});
+      res.status(200).json({
+        success: true,
+        message: 'Products fetched successfully!',
+        data: result,
+      });
+    }
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -97,7 +133,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 
     const result = await ProductService.updateProductByIDFromDb(
       productId,
-      zodParseUpdationData as TProductOptinal ,
+      zodParseUpdationData as TProductOptinal,
     );
 
     console.log(result, 'result');
@@ -120,8 +156,8 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 const deleteSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    console.log(productId);
     const result = await ProductService.deleteProductByIDFromDb(productId);
+    // console.log(productId,result);
 
     res.status(200).json({
       success: true,

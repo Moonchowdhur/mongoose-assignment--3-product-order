@@ -10,7 +10,7 @@ const createProductIntoDb = async (product: TProduct) => {
 
 
 //with search term
-const getAllProductFromDb = async (searchTerm:string) => {
+const getAllProductFromDb = async (searchTerm) => {
   const regex = new RegExp(searchTerm, 'i'); 
 
 
