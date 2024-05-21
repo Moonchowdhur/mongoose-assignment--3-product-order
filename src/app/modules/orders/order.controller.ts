@@ -5,30 +5,7 @@ import { ProductService } from '../products/product.service';
 import { Product } from '../products/product.model';
 
 // create order
-// const createOrder = async (req: Request, res: Response) => {
-//     try {
-//       const orderData = req.body;
 
-//       const zodParseData = orderZodSchema.parse(orderData);
-
-//       console.log(zodParseData);
-
-//       const result = await OrderService.createOrderIntoDb(zodParseData);
-
-//       res.status(200).json({
-//         success: true,
-//         message: 'Order created successfully!',
-//         data: result,
-//       });
-//     } catch (error: any) {
-//       console.log(error.message, 'error');
-//       res.status(400).json({
-//         success: false,
-//         message: 'Wrong input',
-//         error: error,
-//       });
-//     }
-//   };
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -152,7 +129,7 @@ const getAllOrder = async (req: Request, res: Response) => {
     console.log(error.message, 'error');
     res.status(400).json({
       success: false,
-      message: 'No data found',
+      message: 'Order not found',
       error: error,
     });
   }
