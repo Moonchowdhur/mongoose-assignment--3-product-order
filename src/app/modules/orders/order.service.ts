@@ -7,6 +7,7 @@ const createOrderIntoDb = async (order: TOrder) => {
     return result;
   };
 
+// @ts-ignore 
 const getAllOrderFromDb = async (query ) => {
 
   console.log(query,"q");

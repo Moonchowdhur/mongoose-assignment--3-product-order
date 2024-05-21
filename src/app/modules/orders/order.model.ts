@@ -3,12 +3,15 @@ import mongoose, { Schema, model } from 'mongoose';
 import { TOrder } from './order.interface';
 import { string } from 'zod';
 
+
 const orderSchema = new Schema<TOrder>({
   email: {
     type: String,
     required: true,
     // match: [/.+\@.+\..+/, 'Please enter a valid email address'],
   },
+
+  // @ts-ignore 
   productId: {
     type: mongoose.Schema.ObjectId ,
     ref: 'Product',

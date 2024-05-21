@@ -7,7 +7,9 @@ const createProductIntoDb = async (product: TProduct) => {
   return result;
 };
 
-//with search term
+
+
+// @ts-ignore 
 const getAllProductFromDb = async (searchTerm) => {
   const regex = new RegExp(searchTerm, 'i'); 
 
