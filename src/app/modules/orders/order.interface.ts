@@ -4,3 +4,8 @@ export type TOrder= {
     price: number;
     quantity: number;
   }
+
+
+export  type Query ={
+    email: string;
+}

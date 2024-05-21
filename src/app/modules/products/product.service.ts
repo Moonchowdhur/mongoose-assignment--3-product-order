@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { TProduct } from './product.interface';
+import { TProduct, TProductOptinal } from './product.interface';
 import { Product } from './product.model';
 
 const createProductIntoDb = async (product: TProduct) => {
@@ -7,16 +7,13 @@ const createProductIntoDb = async (product: TProduct) => {
   return result;
 };
 
-// const getAllProductFromDb = async () => {
-//   const result = await Product.find();
-//   return result;
-// };
+
 
 //with search term
-const getAllProductFromDb = async (searchTerm:any) => {
+const getAllProductFromDb = async (searchTerm:string) => {
   const regex = new RegExp(searchTerm, 'i'); 
 
-  console.log(regex);
+
  
 const result = await Product.find({
   $or: [
@@ -33,7 +30,7 @@ const getProductByIdFromDb = async (productId: string) => {
   return result;
 };
 
-const updateProductByIDFromDb = async (productId:string, updatedData) => {
+const updateProductByIDFromDb = async (productId:string, updatedData:TProductOptinal) => {
     console.log(productId, updatedData);
 
     const result = await Product.updateOne({ _id: new mongoose.Types.ObjectId(productId) }, updatedData);

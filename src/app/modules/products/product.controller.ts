@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import productZodSchema from './product.zod.validation';
 import { ProductService } from './product.service';
 import productZodForUpdationSchema from './product.zod.optional';
+import { TProductOptinal } from './product.interface';
 
 // create prodcut
 const createProduct = async (req: Request, res: Response) => {
@@ -20,10 +21,9 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-  
     res.status(400).json({
       success: false,
-      message:  'Wrong input',
+      message: 'Wrong input',
       error: error,
     });
   }
@@ -32,18 +32,14 @@ const createProduct = async (req: Request, res: Response) => {
 //   get all product
 const getAllProduct = async (req: Request, res: Response) => {
   const { searchTerm } = req.query;
-  console.log(req.query);
+  console.log(searchTerm);
 
-  let query: any;
+  let query:any;
   if (searchTerm) {
     query = searchTerm;
   }
 
-  console.log(query, "query");
-
   try {
-
-    
     const result = await ProductService.getAllProductFromDb(query);
     res.status(200).json({
       success: true,
@@ -51,7 +47,6 @@ const getAllProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-
     res.status(400).json({
       success: false,
       message: 'No data found',
@@ -72,7 +67,6 @@ const getSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-
     res.status(400).json({
       success: false,
       message: 'No data found',
@@ -103,7 +97,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 
     const result = await ProductService.updateProductByIDFromDb(
       productId,
-      zodParseUpdationData,
+      zodParseUpdationData as TProductOptinal ,
     );
 
     console.log(result, 'result');
@@ -114,7 +108,6 @@ const updateSingleProduct = async (req: Request, res: Response) => {
       data: zodParseUpdationData,
     });
   } catch (error) {
-
     res.status(400).json({
       success: false,
       message: 'Wrong input',
@@ -136,7 +129,6 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
- 
     res.status(400).json({
       success: false,
       message: 'No data deleted',

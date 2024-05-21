@@ -18,12 +18,12 @@ export type TProduct = {
   inventory: TInventory;
 };
 
-// export type TProductOptinal = {
-//   name?: string;
-//   description?: string;
-//   price?: number;
-//   category?: string;
-//   tags?: string[];
-//   variants?: TVariant[];
-//   inventory?: TInventory;
-// };
+export type TProductOptinal = {
+  name?: string;
+  description?: string;
+  price?: number;
+  category?: string;
+  tags?: string[];
+  variants?: TVariant[];
+  inventory?: TInventory;
+};

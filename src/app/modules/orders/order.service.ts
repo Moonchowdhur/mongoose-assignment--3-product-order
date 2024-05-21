@@ -1,4 +1,4 @@
-import { TOrder } from "./order.interface";
+import {  TOrder } from "./order.interface";
 import { Order } from "./order.model";
 
 
@@ -7,7 +7,9 @@ const createOrderIntoDb = async (order: TOrder) => {
     return result;
   };
 
-const getAllOrderFromDb = async (query:any) => {
+const getAllOrderFromDb = async (query ) => {
+
+  console.log(query,"q");
  
   const result = await Order.find(query);
   return result;

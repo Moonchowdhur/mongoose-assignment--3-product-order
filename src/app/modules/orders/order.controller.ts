@@ -95,13 +95,17 @@ const createOrder = async (req: Request, res: Response) => {
 //     }
 //   };
 
+
+
 // working
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     const { email } = req.query;
     let result;
 
-    if (email) {
+ 
+
+    if (email ) {
       result = await OrderService.getAllOrderFromDb({ email });
 
       if (result.length === 0) {
@@ -125,8 +129,8 @@ const getAllOrder = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (error: any) {
-    console.log(error.message, 'error');
+  } catch (error) {
+
     res.status(400).json({
       success: false,
       message: 'Order not found',
