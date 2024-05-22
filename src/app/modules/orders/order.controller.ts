@@ -4,7 +4,6 @@ import { OrderService } from './order.service';
 import { ProductService } from '../products/product.service';
 import { Product } from '../products/product.model';
 
-
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
@@ -17,7 +16,7 @@ const createOrder = async (req: Request, res: Response) => {
     if (!product?._id) {
       return res.status(400).json({
         success: false,
-        message: 'Product not found',
+        message: 'Product not found, please give valid productId',
       });
     }
 
@@ -28,23 +27,24 @@ const createOrder = async (req: Request, res: Response) => {
       });
     }
 
-    // Update the inventory
-    product.inventory.quantity = product.inventory.quantity - quantity;
-    if (product.inventory.quantity === 0) {
-      product.inventory.inStock = false;
-    } else {
-      product.inventory.inStock = true;
-    }
-
-    const result1 = await ProductService.updateProductByIDFromDb(
-      productId,
-      product,
-    );
-
- 
     const zodParseData = orderZodSchema.parse(orderData);
 
     const result = await OrderService.createOrderIntoDb(zodParseData);
+
+    if (result) {
+      // Update the inventory
+      product.inventory.quantity = product.inventory.quantity - quantity;
+      if (product.inventory.quantity === 0) {
+        product.inventory.inStock = false;
+      } else {
+        product.inventory.inStock = true;
+      }
+
+      const result1 = await ProductService.updateProductByIDFromDb(
+        productId,
+        product,
+      );
+    }
 
     res.status(200).json({
       success: true,
@@ -60,15 +60,12 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     const { email } = req.query;
     let result;
 
- 
-
-    if (email ) {
+    if (email) {
       result = await OrderService.getAllOrderFromDb({ email });
 
       if (result.length === 0) {
@@ -93,7 +90,6 @@ const getAllOrder = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-
     res.status(400).json({
       success: false,
       message: 'Order not found',
