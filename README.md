@@ -2,6 +2,8 @@
 
  To run the project locally, follow these steps:
 
- * Please open terminal in the root directory of  project.
+ 
+ * Please clone the repository and open terminal in the root directory of  project.
+ *  install node module using `npm install` and  dependencies
  * To run the project please write npm run start:dev.
 
