@@ -36,8 +36,13 @@ const updateProductByIDFromDb = async (productId:string, updatedData:TProductOpt
     return result;
   };
 
-//   delete product
+//  delete product
 const deleteProductByIDFromDb = async (id:string) => {
+  const IsProductIdExist = await Product.findById(id);
+  console.log(IsProductIdExist,"p");
+  if( !IsProductIdExist){
+    throw new Error('Product not found');
+  }
   const result = await Product.findByIdAndDelete(id);
   return result;
 };
