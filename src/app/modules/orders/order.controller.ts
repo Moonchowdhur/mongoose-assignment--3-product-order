@@ -4,8 +4,6 @@ import { OrderService } from './order.service';
 import { ProductService } from '../products/product.service';
 import { Product } from '../products/product.model';
 
-// create order
-
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -62,42 +60,7 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-// get all order
-// const getAllOrder = async (req: Request, res: Response) => {
 
-//   try {
-//     const {email} = req.query;
-//     let result;
-
-//     if (email) {
-//       result = await OrderService.getAllOrderFromDb({ email });
-//       res.status(200).json({
-//         success: true,
-//         message: 'Orders fetched successfully for user email!',
-//         data: result,
-//       });
-//     } else {
-//       result = await OrderService.getAllOrderFromDb({});
-//       res.status(200).json({
-//         success: true,
-//         message: 'Orders fetched successfully!',
-//         data: result,
-//       });
-//     }
-
-//     } catch (error) {
-
-//       res.status(400).json({
-//         success: false,
-//         message: 'No Order found',
-//         error: error,
-//       });
-//     }
-//   };
-
-
-
-// working
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     const { email } = req.query;
