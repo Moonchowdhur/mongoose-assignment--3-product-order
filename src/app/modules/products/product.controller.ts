@@ -93,7 +93,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 
     console.log(productId, productData);
 
-    // Validation product data with Zod schema
+  
     let zodParseUpdationData;
     try {
       zodParseUpdationData = productZodForUpdationSchema.parse(productData);
