@@ -130,6 +130,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 const deleteSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
+    
     const result = await ProductService.deleteProductByIDFromDb(productId);
 
     res.status(200).json({

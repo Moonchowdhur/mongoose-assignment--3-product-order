@@ -43,7 +43,7 @@ const createOrder = async (req: Request, res: Response) => {
       product,
     );
 
-    console.log(result1);
+ 
     const zodParseData = orderZodSchema.parse(orderData);
 
     const result = await OrderService.createOrderIntoDb(zodParseData);
