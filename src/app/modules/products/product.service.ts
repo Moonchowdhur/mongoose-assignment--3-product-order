@@ -7,20 +7,14 @@ const createProductIntoDb = async (product: TProduct) => {
   return result;
 };
 
-
-
-// @ts-ignore 
+// @ts-ignore
 const getAllProductFromDb = async (searchTerm) => {
-  const regex = new RegExp(searchTerm, 'i'); 
+  const regex = new RegExp(searchTerm, 'i');
 
-const result = await Product.find({
-  $or: [
-    { name: regex  },
-    { description: regex },
-    { category: regex }
-  ]
-});
-return result;
+  const result = await Product.find({
+    $or: [{ name: regex }, { description: regex }, { category: regex }],
+  });
+  return result;
 };
 
 const getProductByIdFromDb = async (productId: string) => {
@@ -28,27 +22,30 @@ const getProductByIdFromDb = async (productId: string) => {
   return result;
 };
 
-const updateProductByIDFromDb = async (productId:string, updatedData:TProductOptinal) => {
-    console.log(productId, updatedData);
+const updateProductByIDFromDb = async (
+  productId: string,
+  updatedData: TProductOptinal,
+) => {
+  console.log(productId, updatedData);
 
-    const result = await Product.updateOne({ _id: new mongoose.Types.ObjectId(productId) }, updatedData);
+  const result = await Product.updateOne(
+    { _id: new mongoose.Types.ObjectId(productId) },
+    updatedData,
+  );
 
-    return result;
-  };
+  return result;
+};
 
 //  delete product
-const deleteProductByIDFromDb = async (id:string) => {
+const deleteProductByIDFromDb = async (id: string) => {
   const IsProductIdExist = await Product.findById(id);
-  console.log(IsProductIdExist,"p");
-  if( !IsProductIdExist){
+
+  if (!IsProductIdExist) {
     throw new Error('Product not found');
   }
   const result = await Product.findByIdAndDelete(id);
   return result;
 };
-
-
-
 
 export const ProductService = {
   createProductIntoDb,
@@ -56,5 +53,4 @@ export const ProductService = {
   getProductByIdFromDb,
   deleteProductByIDFromDb,
   updateProductByIDFromDb,
-
 };
